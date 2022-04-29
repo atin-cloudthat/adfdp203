@@ -5,11 +5,11 @@
 		"factoryName": {
 			"value": "dfatin"
 		},
-		"AzureDataLakeStorage1_accountKey": {
-			"value": ""
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://asadatalake5vcafl2.dfs.core.windows.net"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://asakeyvault5vcafl2.vault.azure.net/"
 		}
 	}
 }

@@ -7,9 +7,9 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "dfatin"
 		},
-		"AzureDataLakeStorage1_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://asakeyvault5vcafl2.vault.azure.net/"
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
@@ -45,6 +45,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -54,12 +67,18 @@
 				"typeProperties": {
 					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
 					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "saatin"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
 		}
 	]
 }
