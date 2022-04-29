@@ -72,7 +72,8 @@
 							"referenceName": "AzureKeyVault1",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "saatin"
+						"secretName": "datalake-accesskey",
+						"secretVersion": "5c06f358a6ef4acd904752374d18a3ef"
 					}
 				}
 			},
